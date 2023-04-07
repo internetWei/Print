@@ -48,7 +48,7 @@ public func plainTextTable(columns: [[String]], alignment: Alignment = .center, 
     var heights: [Int] = []
     var caches: [String:[String]] = [:]
     
-    // 根据列数据获取行数据、宽度数组、高度数组。
+    // 根据列数据获取行数据、每一列的最大宽度、每一行的最大高度。
     do {
         for column in columns {
             var maxWidth = 0
@@ -146,8 +146,8 @@ public func plainTextTable(columns: [[String]], alignment: Alignment = .center, 
             table += rowString + "\n"
         }
         
-        // 行内容绘制结束(行与行之间的分割符)。
-        if line == rows.count - 1 {
+        // 一行内容绘制结束。
+        if line == rows.count - 1 {// 是最后一行。
             table += "└"
             for (index, width) in widths.enumerated() {
                 table += ("─" * width)
@@ -174,6 +174,7 @@ public func plainTextTable(columns: [[String]], alignment: Alignment = .center, 
         
     return table
 }
+
 
 private extension String {
     static func *(left: String, right: Int) -> String {
